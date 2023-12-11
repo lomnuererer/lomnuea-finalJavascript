@@ -51,6 +51,52 @@
         .chart-container {
             margin-top: 20px;
         }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #424242;
+            border-radius: 10px;
+        }
+
+        input {
+            margin-bottom: 20px;
+            background-color: #616161;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            width: 100%; /* ทำให้เต็มกล่อง */
+        }
+
+        button {
+            background-color: #6200ea;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        iframe {
+            width: 30%;
+            margin-top: 20px;
+            border: none;
+        }
+
+        #loading-message {
+            display: none;
+            color: #6200ea;
+            font-size: 18px;
+        }
+
     </style>
 
     <!-- Link to your external JavaScript file -->
@@ -64,7 +110,7 @@
 <body>
     <div id="navbar-container"></div>
 <div class="container">
-    <h1 class="text-center mb-5">5 Functions JavaScript </h1>
+    <h1 class="text-center mb-5">API With JavaScript </h1>
 
     <!-- Your existing HTML content here -->
 
@@ -82,13 +128,26 @@
     <!-- Nationality Function -->
     <div class="function-container">
         <label for="namess" class="form-label">Enter a name:</label>
-        <input type="text" id="namess" class="form-control">
+        <input type="text" id="namess" class="form-control" >
         <button class="btn btn-primary mt-2" onclick="nationality()">Check Nationality</button>
         <p id="names" class="mt-3"></p>
         <table id="nationality" class="mt-3"></table>
     </div>
 </div>
-   
+<form id="myForm" class="text-center" method="POST" action="https://script.google.com/macros/s/AKfycbzy-exluKDfBmCaiFSZ9IIbnYvnKFwM4tNNRViMCCbBt0LavlCh5iCyMqs2f8XbEWkr/exec" target="_self">
+    <input name="Name" type="text" placeholder="Name" required>
+    <input name="Email" type="email" placeholder="Email" required>
+    <input name="Topic" type="text" placeholder="Topic" required>
+    <button type="submit">Send</button>
+    <p id="loading-message">Please wait...</p>
+</form>
+
+<div class="text-center">
+  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS7fmflLDbi5sXt8KkFpvoO-XAgT0oqSog3Uym1n-mKRVKeWvrBJy6fxEaHTe7qwNXURDvh_sZ-8JRS/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+</div>
+<div class="text-center">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15554.04748119908!2d100.86947976066195!3d12.939064160922008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102960fda39af59%3A0x2aa5f7d853e4e858!2sPattaya%20Beach!5e0!3m2!1sen!2sth!4v1702301312814!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
 
 <footer>
     <script src="script.js" defer></script>
@@ -96,6 +155,37 @@
         randomImg();
         fetchPrices();
         setInterval(fetchPrices, 3000);
+    </script>
+    <script>
+        const form = document.getElementById('myForm');
+        const loadingMessage = document.getElementById('loading-message');
+
+        form.onsubmit = function (event) {
+            event.preventDefault();
+
+            // Display loading message
+            loadingMessage.style.display = 'block';
+
+            let count = 5;
+
+            const intervalId = setInterval(() => {
+                loadingMessage.innerText = `Please wait... ${count}`;
+
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    loadingMessage.style.display = 'none';
+                }
+
+                count--;
+            }, 1000);
+
+            // Simulate an asynchronous operation (e.g., submitting the form to Google Sheets)
+            setTimeout(() => {
+                alert('Your message has been sent successfully!');
+                // Reset the form
+                form.reset();
+            }, 5000);
+        };
     </script>
 </footer>
 </body>

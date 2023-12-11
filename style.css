@@ -1,1 +1,18 @@
 
+.navbar {
+    background-color:#2f2f30; /* กำหนดสีให้ตรงกับสีพื้นหลังของ body */
+    
+}
+.navbar-nav a {
+    color: #ffffff; 
+    transition: border-bottom 0.01s;
+}
+.navbar-nav a:hover {
+    color: #bb86fc; 
+    border-bottom: 0.3px solid #ffffff; 
+}
+.navbar-toggler-icon-times::before {
+    content: 'X'; /* ใส่ตัวอักษร "X" */
+    font-size: 1.5rem; /* ปรับขนาดของตัวอักษร */
+    color: #bb86fc; 
+}
